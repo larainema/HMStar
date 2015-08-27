@@ -51,9 +51,9 @@ class User_model extends CI_Model
     /**
      * 添加用户.
      */
-    public function add_user($username, $password, $email)
+    public function add_user($username, $password, $mobile)
     {
-        $data = array('userName' => $username, 'userPassword' => $password, 'userEmail' => $email);
+        $data = array('userName' => $username, 'userPassword' => $password, 'userMobile' => $mobile, 'userEmail' => '');
         $this->db->insert('hmstar_user', $data);
         if ($this->db->affected_rows() > 0) {
             $this->login($username);
@@ -77,4 +77,48 @@ class User_model extends CI_Model
 
         return $query->num_rows() ? true : false;
     }
+    public function mobile_exists($mobile)
+    {
+        $this->db->where('userMobile', $mobile);
+        $query = $this->db->get('hmstar_user');
+
+        return $query->num_rows() ? true : false;
+    }
+
+     /**
+      * 验证码数据库.
+      */
+     public function insert_captcha($data)
+     {
+         $query = $this->db->insert_string('hmstar_captcha', $data);
+         $this->db->query($query);
+         if ($this->db->affected_rows() > 0) {
+             return true;
+         }
+
+         return false;
+     }
+      /**
+       * 验证验证码.
+       */
+      public function check_code($code, $ip)
+      {
+          $expiration = time() - 7200;
+          $this->db->where('captcha_time < ', $expiration)->delete('hmstar_captcha');
+
+          $sql = 'SELECT COUNT(*) AS count FROM hmstar_captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?';
+          //log_message('debug', $sql);
+          //log_message('debug', $code);
+          //log_message('debug', $ip);
+          //log_message('debug', $expiration);
+          $binds = array($code, $ip, $expiration);
+          $query = $this->db->query($sql, $binds);
+          $row = $query->row();
+
+          if ($row->count == 0) {
+              return false;
+          } else {
+              return true;
+          }
+      }
 }

@@ -1,4 +1,8 @@
-<div id="hmstar-main" class="container">
+<!--广告位-->
+<div>
+   <a href="" target="_blank" style="display:block; background:url(http://img2.renrenchou.com/s/upload/adv/2015/0822/b8b5b9bbd16d04fd6a871ace716f44a8.jpg) no-repeat top center; width:100%; height:110px; margin-top:30px;"></a>
+</div>
+
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -26,6 +30,7 @@
     </a>
     <div><p></div>
   </div>
+
 <div id="hmstar-tag" class="container">
   <div class="page-header">
     <span>标签</span>  大家都在看
@@ -188,5 +193,4 @@
     </div>
     <?php } ?>
   </div>
-</div>
 </div>

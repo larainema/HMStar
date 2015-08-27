@@ -109,14 +109,16 @@
   border-top: 0px solid #ddd;
 }
 /*头部logo*/
-.hmstar-header{ width:100%; background:#fff;  position:relative; z-index:113; }
+.hmstar-header{ width:100%; background:#fff;}
 .hmstar-header-content{ width:1160px; margin:0 auto; padding-bottom:28px; }
-.hmstar-logo{ float:left; width:192px; }
+.hmstar-logo-header{ width:100%; background:#fff;  position:relative; z-index:113;margin-top: 10px}
+.hmstar-logo{ float:left; width:192px; margin-left: 100px}
 .hmstar-logo a{ display:block; padding-left:8px; padding-top:36px;}
 .hmstar-logo-name{ float:left; margin-top:80px; padding-left:0px; padding-right:30px;}
+.hmstar-logo-dropdown{ float:right; margin-top:80px; padding-left:0px; padding-right:30px;}
 /*头部搜索*/
-.hmstar-search{ width:200px; height:31px; margin-top: 80px;float: right;margin-right: 100px;margin-bottom: 50px;border:2px solid #ff6c0a;}
-.hmstar-search input{ float:left; border:none; background:none; text-indent:1em; width:316px; padding:5px 0;  }
-.hmstar-search span{ float:right; width:80px; cursor:pointer; height:36px; line-height:36px; text-align:center; font-size:16px; color:#fff; background:#ff6c0a;}
+.hmstar-logo-search{ width:200px; height:31px; margin-top: 80px;float: right;margin-right: 100px;margin-bottom: 50px;border:2px solid #5bc0de;}
+.hmstar-logo-search input{ float:left; border:none; background:none; text-indent:1em; width:200px; padding:5px 0;  }
+/*头部下拉*/
 /* 菜单导航 */
 .hmstar-nav{margin-top:150px;margin-bottom: 30px;position: relative;margin-left: 100px;margin-right: 100px;}

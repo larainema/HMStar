@@ -405,6 +405,7 @@ $.formValidator =
 			var parm = "clientid="+id+"&"+id+"="+encodeURIComponent(srcjo.val());
 			ls_url = ls_url + (ls_url.indexOf("?")>0?("&"+ parm) : ("?"+parm));
 		}
+    //alert(ls_url);
 		$.ajax(
 		{
 			mode : "abort",
