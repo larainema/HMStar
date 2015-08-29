@@ -6,7 +6,7 @@
           <a class="navbar-brand" href="images/favicon.ico"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav hmstar-header-nav">
             <?php if (!empty($this->session->userdata('username'))) { ?>
               <li><a><?php echo $this->session->username ?></a></li>
             <?php } else {?>
