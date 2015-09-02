@@ -25,6 +25,7 @@ class Includes extends CI_Controller
     {
 			$this->load->model('Tag_model');
 			$data['tags'] = $this->Tag_model->get_video_category();
+      $data['news'] = $this->Tag_model->get_news();
 			$this->load->model('Collaborate_model');
 			$data['collaborates'] = $this->Collaborate_model->get_collaborates();
 			$this->load->model('Deep_model');
@@ -48,17 +49,16 @@ class Includes extends CI_Controller
       log_message('debug', sizeof($data['projectsofvideo']));
 		  if (sizeof($data['projectsofvideo']) > 0)
       {
-        $msg = "<ol class='carousel-indicators'>";
-        $msg .= "<li data-target='#carousel-example-generic' data-slide-to='0' class='active'></li>";
-        for($num=1;$num<sizeof($data['projectsofvideo']);$num++)
-        {
-          $msg .= "<li data-target='#carousel-example-generic' data-slide-to='$num'></li>";
-        }
-        $msg .= "</ol>";
-        $msg .= "<div class='carousel-inner' role='listbox'>";
-        $msg .= "<div class='item active' align='middle'>";
-        $msg .= "<embed src='http://static.youku.com/v1.0.0149/v/swf/loader.swf?VideoIDS=XMjM2OTE3ODg4ID&winType=adshow&isAutoPlay=true' quality='high' width='1000' height='460' align='middle' allowScriptAccess='never' allowNetworking='internal' allowfullscreen='true' autostart='0' type='application/x-shockwave-flash'></embed>";
-        $msg .= "</div>";
+        $project = $data['projectsofvideo'][0];
+        //$msg = "<ol class='carousel-indicators'>";
+        //$msg .= "<li data-target='#carousel-example-generic' data-slide-to='0' class='active'></li>";
+        //$msg .= "<li data-target='#carousel-example-generic' data-slide-to='1'></li>";
+        //$msg .= "</ol>";
+        $msg = "<div class='carousel-inner' role='listbox'>";
+        $msg .= "<div class='item active' align='middle' background='url(/assets/images/tag-$video_id)'>";
+        $msg .= "<embed src='$project->projectVideo' quality='high' width='1000' height='460' align='middle' allowScriptAccess='never' allowNetworking='internal' allowfullscreen='true' autostart='0' type='application/x-shockwave-flash'></embed>";
+        $msg .= "</div></div>";
+        /*
         for($num=1;$num<sizeof($data['projectsofvideo']);$num++)
         {
           $msg .= "<div class='item' align='middle'>";
@@ -76,7 +76,7 @@ class Includes extends CI_Controller
           $msg .= "<span class='sr-only'>Next</span>";
           $msg .= "</a>";
         }
-
+        */
         $data['status'] = 1;
         $data['msg'] = $msg;
       }else{

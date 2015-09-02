@@ -72,4 +72,19 @@ class Project_model extends CI_Model
         }
 
     }
+
+    public function add_project()
+    {
+      $data = array('projectName' => $projectname,
+                    'projectVideo' => $projectvideo,
+                    'projectDescription' => $projectdescription,
+                    'projectManagement' => $projectmanagement,
+                    'projectVideoCategory' => $projectvideocategory,
+                    'projectMoveCategory' => $projectmovecategory);
+      $this->db->insert('hmstar_project', $data);
+      if ($this->db->affected_rows() > 0) {
+          return true;
+      }
+      return false;
+    }
 }

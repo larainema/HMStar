@@ -10,6 +10,22 @@ class Tag_model extends CI_Model
     public function get_video_category()
     {
         $query = $this->db->get('hmstar_video_category');
+
         return $query->result();
+    }
+    public function get_news()
+    {
+        $query = $this->db->get('hmstar_news');
+
+        return $query->result();
+    }
+    public function insert_news($upload_data,$newshref,$newsalt)
+    {
+      $data = array('newsHref' => $newshref, 'newsAlt' => $newsalt, 'newsImg' => $upload_data['full_path']);
+      $this->db->insert('hmstar_news', $data);
+      if ($this->db->affected_rows() > 0) {
+          return true;
+      }
+      return false;
     }
 }

@@ -1,9 +1,13 @@
-{// 加载头部公共文件 }
-<include file="Public:header" />
-<div id="business" class="content">
-        <h1>黑马会客室建设中......</h1>
-  <div class="clear"></div>
+<?php $this->load->view('hmstar/includes/css')?>
+<?php $this->load->view('hmstar/includes/top')?>
+<?php $this->load->view('hmstar/includes/menu')?>
+<div class="hmstar-home">
+<div class="hmstar-home-header">
+  <span>黑马会客室</span>
 </div>
-<!-- 主页面结束 -->
-{// 加载尾部公共文件 }
-
+<div class="hmstar-home-video">
+<embed src='http://static.youku.com/v1.0.0149/v/swf/loader.swf?VideoIDS=XMjM2OTE3ODg4ID&winType=adshow&isAutoPlay=true' quality='high' width='1000' height='460' align='middle' allowScriptAccess='never' allowNetworking='internal' allowfullscreen='true' autostart='0' type='application/x-shockwave-flash'></embed>
+</div>
+</div>
+<?php $this->load->view('hmstar/includes/footer')?>
+<?php $this->load->view('hmstar/includes/js')?>

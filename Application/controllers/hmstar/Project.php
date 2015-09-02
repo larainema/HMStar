@@ -75,4 +75,34 @@ class Project extends CI_Controller {
 		$data['industrys3'] = $this->Industry_model->get_industrys(13,18);
 		$this->load->view('/hmstar/project/vote',$data);
 	}
+	public function meet()
+	{
+		$this->load->view('/hmstar/project/meet');
+	}
+	public function deep()
+	{
+		$this->load->model('Deep_model');
+		$data['deeps'] = $this->Deep_model->get_deeps();
+		$this->load->view('/hmstar/project/deep',$data);
+	}
+	public function collaborate()
+	{
+		$this->load->model('Collaborate_model');
+		$data['collaborates'] = $this->Collaborate_model->get_collaborates();
+		$this->load->view('/hmstar/project/collaborate',$data);
+	}
+	public function pub()
+	{
+		$this->load->view('/hmstar/project/pub',$data);
+	}
+
+	public function video($video_id)
+	{
+		$this->load->model('Project_model');
+		$data['projectsofvideo'] = $this->Project_model->get_project_by_videoid($video_id);
+		$this->load->model('Tag_model');
+		$data['tags'] = $this->Tag_model->get_video_category();
+		$data['video_id'] = $video_id;
+		$this->load->view('/hmstar/project/list',$data);
+	}
 }

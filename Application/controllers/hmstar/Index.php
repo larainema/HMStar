@@ -24,6 +24,7 @@ class Index extends CI_Controller {
 	{
 		$this->load->model('Tag_model');
 		$data['tags'] = $this->Tag_model->get_video_category();
+		$data['news'] = $this->Tag_model->get_news();
 		$this->load->model('Collaborate_model');
 		$data['collaborates'] = $this->Collaborate_model->get_collaborates();
 		$this->load->model('Deep_model');

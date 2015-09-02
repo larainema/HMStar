@@ -27,8 +27,7 @@
   </div>
   <div class="hmstar-logo-name">
     <ul>
-      <li>黑马STAR投票平台</li>
-      <li>H&M STAR VOTE</li>
+      <li>创业者我们想让全世界认识你</li>
       <li>www.heimaxing.com</li>
     </ul>
   </div>

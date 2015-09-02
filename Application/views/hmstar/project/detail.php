@@ -7,7 +7,7 @@
   <p><?php echo $project->projectCreateTime?></p>
 </div>
 <div class="hmstar-home-video">
-<embed src='http://static.youku.com/v1.0.0149/v/swf/loader.swf?VideoIDS=XMjM2OTE3ODg4ID&winType=adshow&isAutoPlay=true' quality='high' width='1000' height='460' align='middle' allowScriptAccess='never' allowNetworking='internal' allowfullscreen='true' autostart='0' type='application/x-shockwave-flash'></embed>
+<embed src="<?php echo $project->projectVideo?>" allowFullScreen="true" quality="high" width="1000" height="460" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
 </div>
 <div>
   <ul class="hmstar-home-nav">
@@ -19,7 +19,7 @@
  </ul>
 </div>
 <div class="hmstar-home-body">
-  
+
 </div>
 </div>
 <?php $this->load->view('hmstar/includes/footer')?>

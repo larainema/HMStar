@@ -1,6 +1,16 @@
 <!--广告位-->
-<div>
-   <a href="" target="_blank" style="display:block; background:url() no-repeat top center; width:100%; height:310px; background-color:#000;"></a>
+<div class="hmstar-news">
+<div class="hmstar-news-box">
+  <div class="hmstar-news-img" id="focus">
+    <ul>
+    <?php if (!empty($news)) { ?>
+      <?php foreach ($news as $item):?>
+      <li><a href="<?php echo $item->newsHref;?>" target="_blank"><img src="<?php echo $item->newsImg;?>" alt="<?php echo $item->newsAlt;?>"></a>
+      <?php endforeach;?>
+    <?php }?>
+    </ul>
+  </div>
+</div>
 </div>
 
 <!--标签-->
@@ -10,7 +20,8 @@
     <ul class="hmstar-tag-nav">
       <li><b>标签</b><span>大家都在看</span></li>
       <?php foreach ($tags as $item):?>
-          <li><a onclick="hmstar_main_get_project_by_tag('/hmstar/includes/tag/<?php echo $item->videoId;?>')" href="javascript:void(0);"><?php echo $item->videoName;?></a></li>
+          <!-- <li><a onclick="hmstar_main_get_project_by_tag('/hmstar/includes/tag/<?php echo $item->videoId;?>')" href="javascript:void(0);"><?php echo $item->videoName;?></a></li> -->
+          <li><a href="/hmstar/project/video/<?php echo $item->videoId;?>"><?php echo $item->videoName;?></a></li>
       <?php endforeach;?>
     </ul>
   </div>
@@ -25,7 +36,7 @@
   <div class="col-sm-6">
     <div>
       <div class="hmstar-cd-panel-heading">
-        <h3 class="hmstar-cd-panel-title">商业合作</h3>
+        <h3 class="hmstar-cd-panel-title">商业合作</h3><a class="hmstar-cd-panel-title-small" href="/hmstar/project/collaborate">查看更多</a>
       </div>
       <div class="hmstar-cd-panel-body">
         <?php if (!empty($collaborates)) { ?>
@@ -40,10 +51,10 @@
   </div>
   <div class="col-sm-6">
   <div>
-    <div class="hmstar-cd-panel-heading">
-      <h3 class="hmstar-cd-panel-title">黑马深度</h3>
+    <div class="hmstar-cd-panel-heading-right">
+      <h3 class="hmstar-cd-panel-title-right">黑马深度</h3><a class="hmstar-cd-panel-title-small" href="/hmstar/project/deep">深度文章 我们的观点</a>
     </div>
-    <div class="hmstar-cd-panel-body">
+    <div class="hmstar-cd-panel-body-right">
       <?php if (!empty($deeps)) { ?>
         <?php foreach ($deeps as $item):?>
           <ul>
