@@ -13,6 +13,17 @@ class Tag_model extends CI_Model
 
         return $query->result();
     }
+    public function get_video_category_by_id($id)
+    {
+        $this->db->where('videoId', $id);
+        $query = $this->db->get('hmstar_video_category');
+        if ($query->num_rows() == 1) {
+          $result = $query->row();
+            return $result->videoName;
+        } else {
+            return false;
+        }
+    }
     public function get_news()
     {
         $query = $this->db->get('hmstar_news');

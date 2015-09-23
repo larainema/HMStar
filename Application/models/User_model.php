@@ -13,7 +13,8 @@ class User_model extends CI_Model
      */
     public function login($username)
     {
-        $data = array('username' => $username, 'logged_in' => true);
+        $user =  $this->get_by_username($username);
+        $data = array('username' => $username, 'logged_in' => true, 'userattention' => $user->userAttention, 'userid' => $user->userId);
         $this->session->set_userdata($data);                    //添加session数据
     }
     /**

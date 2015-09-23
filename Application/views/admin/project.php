@@ -3,6 +3,8 @@
 <title>添加新项目</title>
 </head>
 <body>
+<?php $this->load->view('admin/main');?>
+<br/><br/>
 
 <form action="/admin/project/add">
 项目名称：<input type="text" name="projectname" size="20" />

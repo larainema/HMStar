@@ -3,6 +3,8 @@
 <title>Upload Form</title>
 </head>
 <body>
+<?php $this->load->view('admin/main');?>
+<br/><br/>
 
 <h3>Your file was successfully uploaded!</h3>
 

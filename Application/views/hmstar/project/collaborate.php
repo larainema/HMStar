@@ -1,7 +1,7 @@
 <?php $this->load->view('hmstar/includes/css')?>
 <?php $this->load->view('hmstar/includes/top')?>
 <?php $this->load->view('hmstar/includes/menu')?>
-<div class="col-sm-6">
+<div class="container-fluid">
   <div>
     <div class="hmstar-cd-panel-heading">
       <h3 class="hmstar-cd-panel-title">商业合作</h3>
@@ -10,7 +10,7 @@
       <?php if (!empty($collaborates)) { ?>
         <?php foreach ($collaborates as $item):?>
           <ul>
-            <li><a href="$item->collaborateId"><?php echo $item->collaborateName;?></a></li>
+            <li><a href="/hmstar/project/collaborate/<?php echo $item->collaborateId?>"><?php echo $item->collaborateName;?></a></li>
           </ul>
         <?php endforeach;?>
       <?php } ?>

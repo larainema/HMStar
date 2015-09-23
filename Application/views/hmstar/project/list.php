@@ -11,17 +11,29 @@
       <tbody>
         <tr>
           <?php foreach ($industrys1 as $item):?>
-          <td><a href="$item->industryId"><?php echo $item->industryName;?></a></td>
+            <?php if($item->industryId == $industry_id){?>
+          <td><a class="hmstar-green" href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
+            <?php }else{?>
+          <td><a href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
+            <?php }?>
           <?php endforeach;?>
         </tr>
         <tr>
           <?php foreach ($industrys2 as $item):?>
-          <td><a href="$item->industryId"><?php echo $item->industryName;?></a></td>
+            <?php if($item->industryId == $industry_id){?>
+          <td><a class="hmstar-green" href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
+            <?php }else{?>
+          <td><a href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
+            <?php }?>
           <?php endforeach;?>
         </tr>
         <tr>
           <?php foreach ($industrys3 as $item):?>
-          <td><a href="$item->industryId"><?php echo $item->industryName;?></a></td>
+            <?php if($item->industryId == $industry_id){?>
+          <td><a class="hmstar-green" href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
+            <?php }else{?>
+          <td><a href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
+            <?php }?>
           <?php endforeach;?>
         </tr>
       </tbody>
@@ -49,11 +61,10 @@
   </div>
   <div class="hmstar-vote-well">
     <div class="hmstar-vote-input">
-    <input type='radio' name="vote-option" id="vote-option" value='vote-all' autocomplete='off' checked>全部
-    <input type='radio' name="vote-option" id="vote-option" value='vote-before' autocomplete='off'>预热中
-    <input type='radio' name="vote-option" id="vote-option" value='vote-in' autocomplete='off'>投票中
-      <input type='text' placeholder="Search for..." id="vote-search" autocomplete="off">
-        <button class="btn btn-default" type="button">Go!</button>
+    <input type='radio' onclick="hmstar_main_get_project_by_vote('all')" name="vote-option" id="vote-option" value='vote-all' autocomplete='off' checked>全部
+    <input type='radio' onclick="hmstar_main_get_project_by_vote('vote-before')" name="vote-option" id="vote-option" value='vote-before' autocomplete='off'>预热中
+    <input type='radio' onclick="hmstar_main_get_project_by_vote('vote-in')" name="vote-option" id="vote-option" value='vote-in' autocomplete='off'>投票中
+    <input type='radio' onclick="hmstar_main_get_project_by_vote('vote-after')" name="vote-option" id="vote-option" value='vote-after' autocomplete='off'>已完成
     </div>
   </div>
   <ul class="hmstar-vote-nav">
@@ -64,6 +75,21 @@
  </ul>
  <div><p></div>
  <div id="hmstar-vote-body" class="hmstar-vote-body">
+   <?php if (!empty($projects)) { ?>
+     <?php foreach ($projects as $key => $value) {?>
+         <div class='hmstar-vote-body-col-sm-4'>
+         <div class='hmstar-vote-body-thumbnail'>
+         <a href='/hmstar/project/detail/<?php echo $value->projectId?>'>
+         <img src='<?php echo $value->projectImg?>' width='400' height='200' align='middle'></img>
+         <div class='hmstar-vote-body-title'><p><?php echo $value->projectName?><span>收藏</span></p>
+         <p><?php echo $value->projectVideoCategory?></p></div>
+         <div class='hmstar-vote-body-des'><p><?php echo $value->projectDescription?></p></div>
+         <div class='hmstar-vote-body-vote'><table><tr><th>00%</th><th><?php echo (($value->vote == null) ? 0 : $value->vote)?>'票</th><th>00天</th></tr><tr><td>已达</td><td>已投</td><td>倒计时</td></tr></table></div>
+         </a>
+         </div>
+         </div>
+    <?php }?>
+   <?php } ?>
  </div>
 </div>
 <?php $this->load->view('hmstar/includes/footer')?>
