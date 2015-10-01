@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <link href="/assets/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="/assets/css/hmstar-theme.css" rel="stylesheet">
 <link href="/assets/css/hmstar.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/assets/js/jquery.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/ie-emulation-modes-warning.js"></script>
 <script src="/assets/js/hmstar-index.js"></script>

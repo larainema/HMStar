@@ -30,6 +30,7 @@
   <div class="hmstar-logo-search">
     <form accept-charset="utf-8" action="/hmstar/" method="GET" name="site-search" role="search">
       <input type='text' value="" name='field-keywords' autocomplete='off' placeholder="搜索">
+      <button  type="button" style="background-color:#FFF" onClick="document.site-search.submit()"><img  src="/assets/images/hmstar-header-search.png"></button>
     </form>
   </div>
   <?php if (!empty($this->session->userdata('username'))) { ?>

@@ -2,17 +2,19 @@
 <?php $this->load->view('hmstar/includes/top')?>
 <?php $this->load->view('hmstar/includes/menu')?>
 <?php if (!empty($industrys1)) { ?>
-<div class="hmstar-industry, hmstar-vote-detail">
+<div class="hmstar-industry hmstar-vote-detail">
+  <div class="hmstar-main-red-tag"></div>
+  <div class="hmstar-main-red-line-tag1"></div>
   <div class="hmstar-industry-header">
     <span>行业分类</span>
   </div>
   <div class="hmstar-industry-body">
-    <table class="table">
+    <table class="table hmstar-industry-body-table">
       <tbody>
         <tr>
           <?php foreach ($industrys1 as $item):?>
             <?php if($item->industryId == $industry_id){?>
-          <td><a class="hmstar-green" href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
+          <td><a class="hmstar-orange" href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
             <?php }else{?>
           <td><a href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
             <?php }?>
@@ -21,7 +23,7 @@
         <tr>
           <?php foreach ($industrys2 as $item):?>
             <?php if($item->industryId == $industry_id){?>
-          <td><a class="hmstar-green" href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
+          <td><a class="hmstar-orange" href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
             <?php }else{?>
           <td><a href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
             <?php }?>
@@ -30,7 +32,7 @@
         <tr>
           <?php foreach ($industrys3 as $item):?>
             <?php if($item->industryId == $industry_id){?>
-          <td><a class="hmstar-green" href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
+          <td><a class="hmstar-orange" href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
             <?php }else{?>
           <td><a href="/hmstar/project/industry/<?php echo $item->industryId?>"><?php echo $item->industryName;?></a></td>
             <?php }?>
@@ -55,7 +57,10 @@
    </ul>
  </div>
 <?php } ?>
+<script src="/assets/js/hmstar-project.js"></script>
 <div class="hmstar-vote">
+  <div class="hmstar-main-red-tag"></div>
+  <div class="hmstar-main-red-line-tag"></div>
   <div class="hmstar-vote-header">
     <span>大家投</span>
   </div>
@@ -75,21 +80,10 @@
  </ul>
  <div><p></div>
  <div id="hmstar-vote-body" class="hmstar-vote-body">
-   <?php if (!empty($projects)) { ?>
-     <?php foreach ($projects as $key => $value) {?>
-         <div class='hmstar-vote-body-col-sm-4'>
-         <div class='hmstar-vote-body-thumbnail'>
-         <a href='/hmstar/project/detail/<?php echo $value->projectId?>'>
-         <img src='<?php echo $value->projectImg?>' width='400' height='200' align='middle'></img>
-         <div class='hmstar-vote-body-title'><p><?php echo $value->projectName?><span>收藏</span></p>
-         <p><?php echo $value->projectVideoCategory?></p></div>
-         <div class='hmstar-vote-body-des'><p><?php echo $value->projectDescription?></p></div>
-         <div class='hmstar-vote-body-vote'><table><tr><th>00%</th><th><?php echo (($value->vote == null) ? 0 : $value->vote)?>'票</th><th>00天</th></tr><tr><td>已达</td><td>已投</td><td>倒计时</td></tr></table></div>
-         </a>
-         </div>
-         </div>
-    <?php }?>
-   <?php } ?>
  </div>
 </div>
 <?php $this->load->view('hmstar/includes/footer')?>
+<?php $this->load->view('hmstar/includes/js')?>
+<script type="text/javascript">
+hmstar_main_get_project_by_vote('all');
+</script>

@@ -29,6 +29,13 @@ class Project_model extends CI_Model
 
         return $query->result();
     }
+    public function get_projects_nomeet()
+    {
+        $sql = "SELECT * FROM hmstar_project WHERE projectId NOT IN (SELECT projectId FROM hmstar_meet);";
+        $query = $this->db->query($sql);
+
+        return $query->result();
+    }
     public function get_project_categorys($indexi, $indexe)
     {
         $sql = 'SELECT * FROM hmstar_project_category WHERE projectCategoryId BETWEEN ? AND ? ';
@@ -158,8 +165,22 @@ class Project_model extends CI_Model
     public function get_comments($project_id, $page)
     {
       $offset = ($page - 1) * 5;
-      $sql = "SELECT * FROM hmstar_review LIMIT 5 OFFSET $offset;";
+      $sql = "SELECT * FROM hmstar_review WHERE projectId = $project_id LIMIT 5 OFFSET $offset;";
       $query = $this->db->query($sql);
       return $query->result();
+    }
+    public function get_commets_pagecount($project_id)
+    {
+      $sql = "SELECT count(*) AS count FROM hmstar_review WHERE projectId = $project_id;";
+      $query = $this->db->query($sql);
+      $totlecount = $query->row();
+      //print_r($totlecount);
+      $pagecount = intval($totlecount->count / 5);
+      if((intval($totlecount->count) % 5) == 0)
+      {
+        return $pagecount;
+      }else{
+        return $pagecount+1;
+      }
     }
 }

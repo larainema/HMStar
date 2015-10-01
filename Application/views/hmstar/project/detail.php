@@ -24,11 +24,13 @@
 	</div>
 </div>
 <div class="container-fluid hmstar-home">
+	<div class="hmstar-main-red-tag"></div>
+  <div class="hmstar-main-red-line-tag1"></div>
 	<div class="row-fluid">
 		<div class="span12 hmstar-home-header">
-			<h3>
+			<span>
 				当家视频：<?php echo $project->projectName?>
-			</h3>
+			</span>
 			<p>
 				<?php echo $project->projectCreateTime?> - <?php echo $project->projectCreateTime?>
 			</p>
@@ -37,25 +39,29 @@
 	<div class="row-fluid">
 		<div class="span8">
 			<div class="media">
-				<div class="media-body hmstar-home-video">
-						<embed src="<?php echo $project->projectVideo?>" allowFullScreen="true" quality="high" width="1000" height="600" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed><span>.</span>
+				<div class="media-body hmstar-home-video" id="hmstar-home-video">
+						<embed src="<?php echo $project->projectVideo?>" allowFullScreen="true" quality="high" width="1000" height="620" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed><span>.</span>
 				</div>
 			</div>
 		</div>
 		<div class="span4">
 			<div class="media">
-				<embed src="<?php echo $project->projectImg?>" allowFullScreen="true" quality="high" width="400" height="200" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+				<a href="javascript:void(0);" onclick="hmstar_home_video('<?php echo $project->projectVideo?>')"><div class="hmstar-home-video-img"></div></a>
+				<embed src="<?php echo $project->projectImgA?>" allowFullScreen="true" quality="high" width="100%" height="200" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
 			</div>
 			<div class="media">
-				<embed src="<?php echo $project->projectImg?>" allowFullScreen="true" quality="high" width="400" height="200" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+				<a href="javascript:void(0);" onclick="hmstar_home_ceo_video('<?php echo $project->projectId?>')"><div class="hmstar-home-video-img"></div></a>
+				<embed src="<?php echo $project->projectImgC?>" allowFullScreen="true" quality="high" width="100%" height="200" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
 			</div>
-			<div class="row-fluid">
+			<div class="row-fluid hmstar-home-action">
 				<div class="span4">
-					 <button class="btn btn-large btn-primary" type="button" onclick="hmstar_home_favour('<?php echo $project->projectId?>')">赞一下</button>
-					 <h3>(<span id="favourCount"><?php echo $project->projectFavour?></span>)</h3>
+					 <button class="hmstar-home-btn" type="button" onclick="hmstar_home_favour('<?php echo $project->projectId?>')" alt="赞一下">
+						 <img src="/assets/images/hmstar-home-favour.png"/>赞一下</button>
+					 <h3 class="hmstar-home-action-num">(<span id="favourCount"><?php echo $project->projectFavour?></span>)</h3>
 				</div>
 				<div class="span4">
-					 <button class="btn btn-primary btn-large" type="button" id="attention" onclick="hmstar_home_attention('<?php echo $project->projectId?>')">
+					 <button class="hmstar-home-btn" type="button" id="attention" onclick="hmstar_home_attention('<?php echo $project->projectId?>')">
+						 <img src="/assets/images/hmstar-home-attention.png"/>
 						 <span id="attentionText">
 							 <?php if ($isAttention == '1') {
     echo '已关注';
@@ -64,18 +70,22 @@
 }?>
 						 </span>
 					 </button>
-					 <h3>(<span id="attentionCount"><?php echo $project->projectAttention?></span>)</h3>
+					 <h3 class="hmstar-home-action-num">(<span id="attentionCount"><?php echo $project->projectAttention?></span>)</h3>
 				</div>
 				<div class="span4">
-					 <a class="btn btn-large btn-primary" href="#hmstar-modal-container-bdshare" role="button" data-toggle="modal">一键分享</a>
-					 <h3>(<span id="shareCount"><?php echo $project->projectShare?></span>)</h3>
+					 <button class="hmstar-home-btn" href="#hmstar-modal-container-bdshare" role="button" data-toggle="modal">
+						 <img src="/assets/images/hmstar-home-share.png"/>
+						 一键分享</button>
+					 <h3 class="hmstar-home-action-num">(<span id="shareCount"><?php echo $project->projectShare?></span>)</h3>
 					 <?php $this->load->view('hmstar/includes/bs')?>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="hmstar-main-red-line-tag1"></div>
+	<div class="hmstar-main-red-line-tag1" style="margin-top:800px"></div>
 	<div class="row-fluid">
-		<div class="span8">
+		<div class="span8 hmstar-home-body">
 			<ul class="nav nav-tabs hmstar-home-nav">
         <li role="presentation" onclick="hmstar_home_describe('<?php echo $project->projectId?>','0')"><a href="javascript:void(0);">公司介绍</a></li>
         <li role="presentation" onclick="hmstar_home_describe('<?php echo $project->projectId?>','1')"><a href="javascript:void(0);">投票规则</a></li>
@@ -83,12 +93,11 @@
         <li role="presentation" onclick="hmstar_home_describe('<?php echo $project->projectId?>','3')"><a href="javascript:void(0);">招募合伙人</a></li>
         <li role="presentation" onclick="hmstar_home_describe('<?php echo $project->projectId?>','4')"><a href="javascript:void(0);">加入我们</a></li>
 			</ul>
-      <div class="hmstar-home-body" id="hmstar-home-body">
+      <div id="hmstar-home-body" class="hmstar-home-describe">
 				<?php echo $project->projectDescription?>
       </div>
-			<div>
-				网友评论:
-				<?php echo(($project->vote == null) ? 0 : $project->vote)?>
+			<div class="hmstar-home-comment">
+				<div class="hmstar-home-comment-header">网友评论<img src="/assets/images/hmstar-home-comment.png" style="width:20px;margin-bottom:5px"></img></div>
 				<div class="tcdPageCode">
 				</div>
 <script>
@@ -109,7 +118,7 @@ $.ajax({
 	}
 });
 $(".tcdPageCode").createPage({
-		pageCount:2,
+		pageCount:<?php echo $pagecount?>,
 		current:1,
 		backFn:function(p){
 			$.ajax({
@@ -131,52 +140,62 @@ $(".tcdPageCode").createPage({
 		}
 });
 </script>
-			<div id="hmstar-comment-body"></div>
+			<div id="hmstar-comment-body" class="hmstar-home-comment-body"></div>
 
 			</div>
 		</div>
 		<div class="span4">
-			<div class="">
+			<div class="hmstar-home-ceo">
 			<h2>
-				公司CEO
+				公司CEO<img src="/assets/images/hmstar-home-ceo.png" style="width:20px;margin-bottom:5px"></img>
 			</h2>
-			<p>
-				<?php echo $project->projectManagement?>
-			</p>
+			<div class="hmstar-home-ceo-img"><img src="<?php echo $project->projectCeoImg?>"></img></div>
+			<div class="hmstar-home-ceo-info">
+				<ul><li class="f20"><?php echo $project->projectCeo?></li>
+				<li><?php echo $project->projectManagement?></li>
+				<li><?php echo $project->projectCeoMobile?></li>
+			</div>
 		  </div>
-			<div class="row-fluid">
-				<div class="span12">
-					 <button class="btn btn-large btn-primary" type="button" onclick="hmstar_home_freevote('<?php echo $project->projectId?>')">免费投票</button> <button class="btn btn-large btn-primary" type="button">回报投票</button>
+			<div class="hmstar-home-vote">
+				<div class="hmstar-home-vote-button">
+					 <button class="hmstar-home-vote-button-free" type="button" onclick="hmstar_home_freevote('<?php echo $project->projectId?>')">免费投票</button>
+					 <button class="hmstar-home-vote-button-nonfree" type="button">回报投票</button>
+				</div>
+				<div class="hmstar-home-vote-info">
 					 <p>已累计<span id="voteCount"><?php echo(($project->vote == null) ? 0 : $project->vote)?></span>票</p>
 				</div>
 			</div>
-			<div class="row-fluid">
-				<div class="span12">
-					<h3>
-						广告位
-					</h3>
+			<div class="hmstar-home-ad">
+				<?php
+					//echo $project->projectAd;
+					$ads = explode(",",$project->projectAd);
+					foreach ($ads as $key => $value) {
+				?>
+				<div class="hmstar-home-ad-img">
+					<img src="<?php echo $value?>"></img>
 				</div>
+				<?php }?>
 			</div>
-			<div class="row-fluid">
-				<div class="span12">
-					<h3>
-						足迹-最近浏览:
-					</h3>
-				</div>
+			<div class="hmstar-home-foot">
+					<div class="hmstar-home-foot-header">
+						足迹-最近浏览<img src="/assets/images/hmstar-home-comment.png"></img>
+					</div>
+					<div class="hmstar-home-foot-body"></div>
 			</div>
 		</div>
 	</div>
-	<div class="row-fluid">
-		<div class="span12">
-			<h3>
-				猜你喜欢
-			</h3>
-		</div>
+	<div class="hmstar-home-favour">
+	  <div class="hmstar-main-red-tag"></div>
+	  <div class="hmstar-main-red-line-tag"></div>
+	  <div class="hmstar-home-favour-header">
+	    <span>猜你喜欢</span><img src="/assets/images/hmstar-home-like.png"></img>
+	  </div>
+		<div class="hmstar-home-favour-body"><?php echo $msg?></div>
 	</div>
 </div>
 <?php $this->load->view('hmstar/includes/footer')?>
-<?php $this->load->view('hmstar/includes/js')?>
 <script src="/assets/js/hmstar-project.js"></script>
+<?php $this->load->view('hmstar/includes/js')?>
 <script>
 var isAttention = "<?php echo $isAttention ?>";
 </script>

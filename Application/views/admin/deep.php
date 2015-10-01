@@ -35,6 +35,10 @@
 <br /><br />
 文章作者：<input type="text" name="deep_user" size="30" />
 <br /><br />
+文章作者照片：<input type="file" name="deep_user_img" size="30" />
+<br /><br />
+文章作者联系方式：<input type="text" name="deep_user_contact" size="30" />
+<br /><br />
 文章内容：<textarea name="deep_content" cols="30" rows="40" /></textarea>
 <br /><br />
 <input type="submit" value="upload" />

@@ -1,5 +1,7 @@
 <!--广告位-->
 <div class="hmstar-news">
+<div class="hmstar-main-red"></div>
+<div class="hmstar-main-red-line"></div>
 <div class="hmstar-news-box">
   <div class="hmstar-news-img" id="focus">
     <ul>
@@ -21,25 +23,29 @@
 <!--标签-->
 <script src="/assets/js/hmstar-project.js"></script>
 <div class="hmstar-tag">
+  <div class="hmstar-main-red-tag"></div>
+  <div class="hmstar-main-red-line-tag1"></div>
    <div>
     <ul class="hmstar-tag-nav">
       <li><b>标签</b><span>大家都在看</span></li>
       <?php foreach ($tags as $item):?>
           <!-- <li><a onclick="hmstar_main_get_project_by_tag('/hmstar/includes/tag/<?php echo $item->videoId;?>')" href="javascript:void(0);"><?php echo $item->videoName;?></a></li> -->
-          <li><a href="/hmstar/project/video/<?php echo $item->videoId;?>"><?php echo $item->videoName;?></a></li>
+          <li><a href="/hmstar/project/video/<?php echo $item->videoId;?>" onmouseover="hmstar_tag_change('<?php echo $item->videoId;?>')"><?php echo $item->videoName;?></a></li>
       <?php endforeach;?>
     </ul>
   </div>
       <div class="hmstar-tag-content">
-        <img src="/assets/images/hmstar-main-tag-1.jpg"></img>
+        <img src="/assets/images/hmstar-main-tag-1.jpg" id="hmstar-tag-img"></img>
       </div>
 </div>
 
 <div class="hmstar-cd">
+  <div class="hmstar-main-red"></div>
+  <div class="hmstar-main-red-line"></div>
   <div class="col-sm-6">
     <div>
       <div class="hmstar-cd-panel-heading">
-        <h3 class="hmstar-cd-panel-title">商业合作</h3><a class="hmstar-cd-panel-title-small" href="/hmstar/project/collaborateall">查看更多<img src="/assets/images/hmstar-main-tag-right.png" width="10px"></img></a>
+        <h3 class="hmstar-cd-panel-title">商业服务</h3><a class="hmstar-cd-panel-title-small" href="/hmstar/project/collaborateall">查看更多<img src="/assets/images/hmstar-main-tag-right.png" width="10px"></img></a>
       </div>
       <div class="hmstar-cd-panel-body">
         <?php if (!empty($collaborates)) { ?>
@@ -61,7 +67,7 @@
       <?php if (!empty($deeps)) { ?>
         <?php foreach ($deeps as $item):?>
           <ul>
-            <li class="f22"><a href="/hmstar/project/deepid/<?php echo $item->deepId?>"><?php echo $item->deepTitle;?></a></li>
+            <li class="f22"><img src="/assets/images/hmstar-main-deep.png" style="width:30px;margin-bottom:5px"></img><a href="/hmstar/project/deepid/<?php echo $item->deepId?>"><?php echo $item->deepTitle;?></a></li>
             <li class="color-red mt-10">发表于：<?php echo $item->deepTime;?> 作者：<?php echo $item->deepUser;?></li>
             <br/>
           </ul>
@@ -73,6 +79,8 @@
 </div>
 
 <div class="hmstar-industry">
+  <div class="hmstar-main-red-tag"></div>
+  <div class="hmstar-main-red-line-tag1"></div>
   <div class="hmstar-industry-header">
     <span>行业分类</span>
   </div>
@@ -102,6 +110,8 @@
 </div>
 
 <div class="hmstar-vote">
+  <div class="hmstar-main-red-tag"></div>
+  <div class="hmstar-main-red-line-tag"></div>
   <div class="hmstar-vote-header">
     <span>大家投</span>
   </div>
@@ -123,3 +133,7 @@
  <div id="hmstar-vote-body" class="hmstar-vote-body">
  </div>
 </div>
+<script type="text/javascript">
+//hmstar_main_get_project_by_tag('/hmstar/includes/tag/1');
+hmstar_main_get_project_by_vote('all');
+</script>

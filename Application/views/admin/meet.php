@@ -33,6 +33,12 @@
 <br /><br />
 访谈手迹：<textarea name="meet_hands" cols="30" rows="40" /></textarea>
 <br /><br />
+项目：<select name="meet_project">
+<?php foreach($projects as $item){?>
+  <option value="<?php echo $item->projectId?>"><?php echo $item->projectName?></option>
+<?php }?>
+</select>
+<br /><br />
 <input type="submit" value="upload" />
 
 </form>

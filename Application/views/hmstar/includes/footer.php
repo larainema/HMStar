@@ -1,11 +1,13 @@
 <!--首页底部-->
 <div class="hmstar-footer">
+  <div class="hmstar-main-red"></div>
+  <div class="hmstar-foot-red-line"></div>
      <div class="hmstar-footer-list">
           <div class="hmstar-footer-list-t">
                <ul class="hmstar-footer-ul">
                     <li>
-                         <h4 class="h4-img1">关于黑马Star</h4>
-                         <a target="_blank" href="">黑马Star介绍</a>
+                         <h4 class="h4-img1">关于黑马</h4>
+                         <a target="_blank" href="">公司介绍</a>
                          <a target="_blank" href="">联系我们</a>
                     </li>
                     <li>
@@ -17,9 +19,9 @@
                     <img src="" alt="黑马Star微信公众号" />
                </div>
                <div class="hmstar-footer-logo">
-                    <a href="#"><img src="" alt="黑马Star" /></a>
+                    <a href="/hmstar/"><img src="/assets/images/hmstar.png" alt="黑马Star" width="35px" height="15px"/></a>
                     <p class="hmstar-hot-line">全国服务热线：</p>
-                    <p class="hmstar-hot-line-numb">400-070-5286</p>
+                    <p class="hmstar-hot-line-numb">400-000-0000</p>
                </div>
           </div>
           <div class="hmstar-footer-list-c">

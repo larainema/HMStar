@@ -140,3 +140,107 @@ function hmstar_home_describe(project_id,op) {
     }
   })
 }
+/**
+ * 标签转换
+ */
+function hmstar_tag_change(video_id) {
+  $('#hmstar-tag-img').attr("src","/assets/images/hmstar-main-tag-"+video_id+".jpg");
+}
+/**
+ * 视频
+ */
+function hmstar_home_video(video_name) {
+  $('#hmstar-home-video > embed').remove();
+  var str ='<embed src="'+ video_name +'" allowFullScreen="true" quality="high" width="1000" height="600" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed><span>.</span>';
+  $('#hmstar-home-video').html(str);
+}
+/**
+ * CEO视频
+ */
+function hmstar_home_ceo_video(project_id) {
+  $.ajax({
+    url: "/hmstar/project/meetbyproject/",
+    data: {
+      project_id:project_id,
+    },
+    dataType: 'json',
+    success: function(data) {
+      //alert(data.meetbyproject);
+      if (data.status == 1) {
+        $('#hmstar-home-video > embed').remove();
+        var str ='<embed src="'+ data.meetbyproject['meetVideo'] +'" allowFullScreen="true" quality="high" width="1000" height="600" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed><span>.</span>';
+        $('#hmstar-home-video').html(str);
+      } else {
+        $('#hmstar-home-video').attr("style","display:none");
+      }
+      return true;
+    }
+  })
+
+}
+/**
+ * Meet CEO
+ */
+function hmstar_meet_old_pre() {
+  $.ajax({
+    url: "/hmstar/project/meetbypage/",
+    data: {
+      p:page,
+      action:"pre",
+    },
+    dataType: 'json',
+    success: function(data) {
+      if (data.status == 1) {
+        $('#hmstar-meet-old').html(data.msg);
+        if(page == 1){
+          page = pagecount;
+        }else{
+          page = page - 1;
+        }
+      } else {
+        $('#hmstar-meet-old').html(data.msg)
+      }
+      return true;
+    }
+  })
+}
+function hmstar_meet_old_next() {
+  $.ajax({
+    url: "/hmstar/project/meetbypage/",
+    data: {
+      p:page,
+      action:'next',
+    },
+    dataType: 'json',
+    success: function(data) {
+      if (data.status == 1) {
+        $('#hmstar-meet-old').html(data.msg);
+        if(page == pagecount){
+          page = 1;
+        }else{
+          page = page + 1;
+        }
+      } else {
+        $('#hmstar-meet-old').html(data.msg)
+      }
+      return true;
+    }
+  })
+}
+/**
+ * Get deep by type
+ */
+function hmstar_deep_get_deep(type) {
+  type = type ? type : 'all';
+  //alert(type);
+  $.ajax({
+    url: "/hmstar/project/deep/",
+    data: {
+      type: type,
+    },
+    dataType: 'json',
+    success: function(data) {
+      return true;
+    }
+  })
+}

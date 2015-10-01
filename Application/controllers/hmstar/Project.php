@@ -40,16 +40,14 @@ class Project extends CI_Controller
             foreach ($data['projectsoftype'] as $key => $value) {
                 //print_r($value);
                 $tagname = $this->Tag_model->get_video_category_by_id($value->projectVideoCategory);
-                $vote_status = "预热中";
-                $vote_css = "before";
-                if ($value->projectStatus==1)
-                {
-                  $vote_status = "投票中";
-                  $vote_css = "in";
-                }else if($value->projectStatus==2)
-                {
-                  $vote_status = "已完成";
-                  $vote_css = "after";
+                $vote_status = '预热中';
+                $vote_css = 'before';
+                if ($value->projectStatus == 1) {
+                    $vote_status = '投票中';
+                    $vote_css = 'in';
+                } elseif ($value->projectStatus == 2) {
+                    $vote_status = '已完成';
+                    $vote_css = 'after';
                 }
                 $msg .= "<div class='hmstar-vote-body-col-sm-4'>";
                 $msg .= "<div class='hmstar-vote-body-$vote_css'>$vote_status</div>";
@@ -80,10 +78,44 @@ class Project extends CI_Controller
     public function detail($projectid)
     {
         $this->load->model('Project_model');
+        $this->load->model('Tag_model');
         if ($projectid == 0) {
             $data['project'] = $this->Project_model->get_project_by_id(4);
+            $data['pagecount'] = $this->Project_model->get_commets_pagecount(4);
         } else {
             $data['project'] = $this->Project_model->get_project_by_id($projectid);
+            $data['pagecount'] = $this->Project_model->get_commets_pagecount($projectid);
+        }
+        $data['projectsoftype'] = $this->Project_model->get_project_by_type('all');
+        if (sizeof($data['projectsoftype']) > 0) {
+            $data['status'] = 1;
+            $msg = '';
+            foreach ($data['projectsoftype'] as $key => $value) {
+                $tagname = $this->Tag_model->get_video_category_by_id($value->projectVideoCategory);
+                $vote_status = '预热中';
+                $vote_css = 'before';
+                if ($value->projectStatus == 1) {
+                    $vote_status = '投票中';
+                    $vote_css = 'in';
+                } elseif ($value->projectStatus == 2) {
+                    $vote_status = '已完成';
+                    $vote_css = 'after';
+                }
+                $msg .= "<div class='hmstar-vote-body-col-sm-4'>";
+                $msg .= "<div class='hmstar-vote-body-$vote_css'>$vote_status</div>";
+                $msg .= "<div class='hmstar-vote-body-thumbnail'>";
+                $msg .= "<img src='$value->projectImg' align='middle'></img>";
+                $msg .= "<div class='hmstar-vote-body-title'><p class='hmstar-vote-body-title-p'>$value->projectName<span><img src='/assets/images/hmstar-vote-body-attention.png' class='hmstar-vote-body-attention'></img></span></p>";
+                $msg .= "<p class='hmstar-vote-body-tag'><img src='/assets/images/hmstar-vote-body-tag.png'></img>$tagname</p></div>";
+                $msg .= "<div class='hmstar-vote-body-des'><p>$value->projectDescription</p></div>";
+                $msg .= "<div class='hmstar-vote-body-vote'><table><tr><th>00%</th><th>".(($value->vote == null) ? 0 : $value->vote).'票</th><th>00天</th></tr><tr><td>已达</td><td>已投</td><td>倒计时</td></tr></table></div>';
+                $msg .= '</div>';
+                $msg .= "<a href='/hmstar/project/detail/$value->projectId'>";
+                $msg .= "<div class='hmstar-vote-body-img'></div>";
+                $msg .= '</a>';
+                $msg .= '</div>';
+            }
+            $data['msg'] = $msg;
         }
         $data['isAttention'] = '0';
         if (!empty($this->session->userdata('username'))) {
@@ -110,17 +142,103 @@ class Project extends CI_Controller
         $data['industry_id'] = $industry_id;
         $this->load->view('/hmstar/project/list', $data);
     }
-    public function meet()
+    public function meet($meet_time)
     {
         $this->load->model('Deep_model');
+        $page = $this->input->get('p');
+        //$meet_time = $this->input->get('meet_time');
+        if (empty($meet_time))
+        {
+          $meet_time = "001";
+        }
+        if(empty($page)){
+          $page = 1;
+        }
         $data['meets'] = $this->Deep_model->get_meets();
-        $data['meet'] = $this->Deep_model->get_meet_by_time('001');
+        $data['meet'] = $this->Deep_model->get_meet_by_time($meet_time);
+        $data['meet_page_count'] = $this->Deep_model->get_meet_pagecount();
+        $data['meetsbypage'] = $this->Deep_model->get_meet_by_page($page);
+        $data['p'] = $page;
         $this->load->view('/hmstar/project/meet', $data);
+    }
+    public function meetbyproject()
+    {
+        $this->load->model('Deep_model');
+        $project_id = $this->input->get('project_id');
+        $data['meetbyproject'] = $this->Deep_model->get_meet_by_project($project_id);
+        if (!empty($data['meetbyproject'])) {
+            $data['status'] = 1;
+        } else {
+            $data['status'] = 0;
+            $data['msg'] = 'ERRor';
+        }
+
+        return $this->output
+    ->set_content_type('application/json')
+    ->set_output(json_encode($data));
+    }
+    public function meetbypage()
+    {
+        $this->load->model('Deep_model');
+        $page = $this->input->get('p');
+        $action = $this->input->get('action');
+        $pagecount = $this->Deep_model->get_meet_pagecount();
+        if ($action == "pre"){
+          if($page == "1"){
+            $page = $pagecount;
+            $meetsbypage = $this->Deep_model->get_meet_by_page($page);
+          }else{
+            $page = $page - 1;
+            $meetsbypage = $this->Deep_model->get_meet_by_page($page);
+          }
+        }elseif ($action == "next") {
+          if($page == $pagecount){
+            $page = 1;
+            $meetsbypage = $this->Deep_model->get_meet_by_page($page);
+          }else{
+            $page = $page + 1;
+            $meetsbypage = $this->Deep_model->get_meet_by_page($page);
+          }
+        }
+        //print_r($meetsbypage);
+        $msg = '';
+        foreach ($meetsbypage as $item) {
+          //print_r($item);
+          $msg .= "<a href='/hmstar/project/meet/$item->meetTime'>";
+          $msg .= "<div class='hmstar-meet-old-des'><ul>";
+          $msg .= "<li class='hmstar-meet-old-des-img'><img src='$item->meetImg'></img></li>";
+          $msg .= "<li class='hmstar-meet-old-des-number'>$item->meetTime"."期</li></ul>";
+          $msg .= "</div>";
+          $msg .= "</a>";
+        }
+        $data['msg'] = $msg;
+        if (!empty($data['msg'])) {
+            $data['status'] = 1;
+        } else {
+            $data['status'] = 0;
+            $data['msg'] = 'ERRor';
+        }
+
+        return $this->output
+    ->set_content_type('application/json')
+    ->set_output(json_encode($data));
     }
     public function deep()
     {
         $this->load->model('Deep_model');
-        $data['deeps'] = $this->Deep_model->get_deeps();
+        $per_page = $this->input->get('per_page');
+        $type = $this->input->get('type');
+        if (empty($type)){
+          $type = 'all';
+        }
+        if (empty($per_page)){
+          $per_page = 0;
+        }
+        //print_r($per_page);
+        $data['deeps'] = $this->Deep_model->get_deeps_by_page($per_page,$type);
+        $data['totaldeeps'] = $this->Deep_model->get_deeps_by_type($type);
+        //$data['deepnumber'] = $this->Deep_model->get_deepnumber();
+
         $this->load->view('/hmstar/project/deep', $data);
     }
     public function deepid($deep_id)
@@ -275,9 +393,12 @@ class Project extends CI_Controller
         $project_id = $this->input->get('project_id');
         $p = $this->input->get('p');
         $comments = $this->Project_model->get_comments($project_id, $p);
+        $pagecount = $this->Project_model->get_commets_pagecount($project_id);
+        $data['pagecount'] = $pagecount;
         $msg = '<ul>';
         foreach ($comments as $key => $value) {
-            $msg .= '<li>'.$value->reviewContent.'</li>';
+            $build = ($key + 1) + (($p - 1) * 5);
+            $msg .= '<li>'.$build.'楼  '.$value->reviewContent.'</li>';
         }
         $msg .= '</ul>';
         $data['msg'] = $msg;

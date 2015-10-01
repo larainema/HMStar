@@ -3,7 +3,7 @@
 /* 全局 */
 *{outline: none;}
 body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{ margin:0; padding:0; _margin:0; _padding:0;}
-body,html,input{line-height:150%; font-family:"微软雅黑","宋体",tahoma,arial,sans-serif; font-size:14px;}
+body,html,input{line-height:150%; font-family:"方正悠黑简体－细","微软雅黑","宋体",tahoma,arial,sans-serif; font-size:14px;}
 table,body{border-collapse:collapse;border-spacing:0;}
 /*fieldset,*/img {border:0}
 img{ vertical-align:middle; padding:0; margin:0;}
@@ -33,6 +33,7 @@ i{ font-style:normal;}
 .f22{ font-size:22px;}
 .f24{ font-size:24px;}
 .f30{ font-size:30px;}
+.f36{ font-size: 36px;}
 .f48{ font-size:48px;}
 .f64{ font-size:64px;}
 .lh20{line-height: 20px}
